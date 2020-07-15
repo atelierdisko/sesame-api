@@ -2,13 +2,13 @@ version: "3.7"
 
 services:
   node:
-    working_dir: /app
-    image: node:alpine3.12
+    build:
+      context: .
+      dockerfile: _docker/node/Dockerfile
     ports:
       - "9000:9000"
     volumes:
-      - .:/app
-    command: "npm run dev"
+      - ./index.js:/home/node/app/index.js
 
   redis:
     image: redis:6.0.5-alpine
