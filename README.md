@@ -4,7 +4,7 @@ API to create expiring secrets with passphrase protection. Used by client applic
 
 ## Local development
 ```shell script
-_docker/init.sh
+docker-compose up
 ```
 
 ## Endpoints
