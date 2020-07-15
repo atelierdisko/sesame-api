@@ -2,6 +2,11 @@
 
 API to create expiring secrets with passphrase protection. Used by client application [Sesame](https://github.com/atelierdisko/sesame).
 
+## Local development
+```shell script
+_docker/init.sh
+```
+
 ## Endpoints
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Sesame&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fatelierdisko%2Fsesame-api%2Fmaster%2Finsomnia.json)

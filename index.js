@@ -17,7 +17,6 @@ const lifetimes = {
   '7 days': 60 * 60 * 24 * 7,
 };
 
-
 const validations = {
   hash: Joi.string().alphanum().min(64).max(64).required(),
   lifetime: Joi.string().valid(...Object.keys(lifetimes)).required(),
@@ -57,10 +56,12 @@ const init = async () => {
 
       RedisClient.set(hash, secret, 'EX', expiry);
 
-      return h.response({
-        hash: hash,
-        expiry: expiry,
-      }).code(201)
+      return h.response(
+        {
+          hash,
+          expiry
+        }
+      ).code(201)
     },
     options: {
       validate: {
@@ -96,7 +97,7 @@ const init = async () => {
     }
   });
 
-  // reveal + delete
+  // reveal
   server.route({
     method: ['GET'],
     path: '/api/secret/{hash}',
@@ -109,11 +110,11 @@ const init = async () => {
       }
 
       RedisClient.del(hash);
-      return h.response(secret);
+      return h.response({secret});
     }
   });
 
-  // reveal + delete
+  // delete
   server.route({
     method: ['DELETE'],
     path: '/api/secret/{hash}',
