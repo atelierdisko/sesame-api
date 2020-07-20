@@ -2,6 +2,7 @@
 
 API to create expiring secrets with passphrase protection. Used by client application [Sesame](https://github.com/atelierdisko/sesame).
 
+
 ## Local development
 ```shell script
 docker-compose up
@@ -10,83 +11,71 @@ docker-compose up
 ## Endpoints
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Sesame&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fatelierdisko%2Fsesame-api%2Fmaster%2Finsomnia.json)
+
+Note that the API does not encrypt secrets before saving them. To make sure the server never knows about the contents, secrets are encrypted client side using AES-256. For explanatory purposes secrets are provided unencrypted in this documentation.
+
 ### Create a new secret
 
-**POST** /secret
+**POST** /api/secret
 
 **Request**
 ```json
 {
-  "secret": "Moin, na?",
-  "lifetime": "1 hour"
+  "secret": "Moin. Auch hier?",
+  "lifetime": "1 day"
 }
 ```
 
 **Response (200)**
 ```json
 {
-  "hash": "ef7e272155d0a13583010b47566f3c844a6965e4ab79f5ee7d5eb7147000caef",
-  "expiry": 3600
+  "hash": "99c0789a791768be960359edf3f3e5c811eda57d3ddc2d7f90791cf5ef111f2c",
+  "expiry": 86400
 }
 ```
 
 **Response (400)**
 ```json
 {
-  "message": "Bad request",
-  "errors": {
-    "secret": "Required",
-    "lifetime": "Unsupported lifetime"
-  },
-  "code": 400
+  "statusCode": 400,
+  "error": "Bad Request",
+  "message": "\"lifetime\" must be one of [10 minutes, 1 hour, 2 hours, 8 hours, 1 day, 7 days]",
+  "validation": {
+    "source": "payload",
+    "keys": [
+      "lifetime"
+    ]
+  }
 }
 ```
 
 ### Check that a secret exists
-**GET** /secret/{hash}/exits
+**GET** /api/secret/{hash}/exits
 
-**Response (200)**
+**Response (204)**
 ```
-{
-  "secret": "disko not disco"
-}
+¯\_(ツ)_/¯
 ```
+
 
 **Response (404)**
 ```
-{
-  "message": "Hash not found",
-  "code": 404
-}
+¯\_(ツ)_/¯
 ```
 
 ### Retrieve a secret
-**GET** /secret/{hash}\
-**GET** /secret/{hash}?passphrase={passphrase}
+**GET** /api/secret/{hash}
 
 **Response (200)**
 ```
 {
-  "requiresPassphrase": true
+  "secret": "Moin. Auch hier?"
 }
 ```
-
-
-**Response (403)**
-```
-{
-  "message": "Passphrase invalid!",
-  "code": 403
-}
-```
-
 
 **Response (404)**
 ```
-{
-  "message": "Hash not found",
-  "code": 404
-}
+¯\_(ツ)_/¯
 ```
 
 ### Delete a secret
@@ -99,8 +88,5 @@ docker-compose up
 
 **Response (404)**
 ```
-{
-  "message": "Hash not found",
-  "code": 404
-}
+¯\_(ツ)_/¯
 ```
