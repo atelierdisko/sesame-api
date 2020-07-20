@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: _docker/node/Dockerfile
     ports:
-      - "9000:9000"
+      - "9001:9000"
     volumes:
       - ./index.js:/home/node/app/index.js
 
