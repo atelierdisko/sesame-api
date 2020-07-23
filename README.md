@@ -5,7 +5,10 @@ API to create expiring secrets with passphrase protection. Used by client applic
 ## Local development
 1. Download repository
 2. Start [Docker](https://www.docker.com/get-started)
-3. Start Sesame Docker container with `docker-compose up`
+3. Start Sesame Docker container with 
+```
+docker-compose up
+```
 
 The container is now up and running.
 
