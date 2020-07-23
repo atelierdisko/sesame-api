@@ -9,8 +9,7 @@ API to create expiring secrets with passphrase protection. Used by client applic
 
 The container is now up and running.
 
-To see Sesame in your browser, additionally download the [Sesame client application](https://github.com/atelierdisko
-/sesame)
+To see Sesame in your browser, additionally download the [Sesame client application](https://github.com/atelierdisko/sesame)
 
 ## Endpoints
 
