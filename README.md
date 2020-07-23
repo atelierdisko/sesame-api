@@ -2,11 +2,15 @@
 
 API to create expiring secrets with passphrase protection. Used by client application [Sesame](https://github.com/atelierdisko/sesame).
 
-
 ## Local development
-```shell script
-docker-compose up
-```
+1. Download repository
+2. Start [Docker](https://www.docker.com/get-started)
+3. Start Sesame Docker container with `docker-compose up`
+
+The container is now up and running.
+
+To see Sesame in your browser, additionally download the [Sesame client application](https://github.com/atelierdisko
+/sesame)
 
 ## Endpoints
 
